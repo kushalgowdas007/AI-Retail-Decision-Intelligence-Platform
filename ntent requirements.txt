@@ -1,0 +1,16 @@
+warning: in the working copy of 'api/app.py', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/api/app.py b/api/app.py[m
+[1mindex 13ac39a..fd7160d 100644[m
+[1m--- a/api/app.py[m
+[1m+++ b/api/app.py[m
+[36m@@ -6,6 +6,10 @@[m [mServes all computed metrics to the Streamlit dashboard.[m
+ import os[m
+ import sys[m
+ [m
+[32m+[m[32mROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))[m
+[32m+[m[32mif ROOT_DIR not in sys.path:[m
+[32m+[m[32m    sys.path.insert(0, ROOT_DIR)[m
+[32m+[m[41m    [m
+ import pandas as pd[m
+ from fastapi import FastAPI[m
+ from fastapi.middleware.cors import CORSMiddleware[m
