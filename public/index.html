@@ -1,0 +1,2759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Retail Decision Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+/* ============================================================
+   AI Retail Decision Intelligence Platform — Enterprise CSS
+   Premium dark navy SaaS design system.
+   Version: 2.0
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ── Root Design Tokens ────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-primary:       #080D17;
+  --bg-secondary:     #0D1421;
+  --bg-card:          #111B2A;
+  --bg-card-hover:    #162033;
+  --bg-elevated:      #0F1927;
+
+  /* Borders */
+  --border:           #1E2A3A;
+  --border-accent:    #2A3A52;
+  --border-glow:      rgba(59,130,246,0.3);
+
+  /* Brand Colours */
+  --color-primary:    #3B82F6;
+  --color-primary-dim:#2563EB;
+  --color-ai:         #06B6D4;
+  --color-ai-dim:     #0891B2;
+  --color-success:    #22C55E;
+  --color-warning:    #F59E0B;
+  --color-critical:   #EF4444;
+  --color-purple:     #8B5CF6;
+
+  /* Text */
+  --text-primary:     #F8FAFC;
+  --text-secondary:   #94A3B8;
+  --text-muted:       #475569;
+  --text-dim:         #334155;
+
+  /* Radii */
+  --radius-xs:  4px;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
+
+  /* Shadows */
+  --shadow-card:     0 2px 16px rgba(0,0,0,0.4);
+  --shadow-elevated: 0 6px 32px rgba(0,0,0,0.6);
+  --shadow-glow-b:   0 0 20px rgba(59,130,246,0.15);
+  --shadow-glow-c:   0 0 20px rgba(6,182,212,0.15);
+}
+
+/* ── Base / Typography ──────────────────────────────────────── */
+html, body, [class*="css"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Hide default Streamlit chrome ─────────────────────────── */
+#MainMenu,
+footer,
+header[data-testid="stHeader"],
+.stDeployButton,
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"] {
+  display: none !important;
+}
+
+/* ── Remove default app padding ────────────────────────────── */
+.main .block-container {
+  padding: 0 1.5rem 2.5rem 1.5rem !important;
+  max-width: 100% !important;
+}
+
+/* ── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb    { background: var(--border-accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════ */
+[data-testid="stSidebar"] {
+  background: linear-gradient(180deg, #0A1220 0%, #0D1421 100%) !important;
+  border-right: 1px solid var(--border) !important;
+  min-width: 228px !important;
+  max-width: 228px !important;
+}
+[data-testid="stSidebar"] > div:first-child {
+  padding-top: 0 !important;
+}
+[data-testid="stSidebarNav"] { display: none !important; }
+
+/* Sidebar brand block */
+.sidebar-brand {
+  padding: 1.25rem 1rem 1rem 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, rgba(6,182,212,0.06) 0%, rgba(59,130,246,0.04) 100%);
+}
+.sidebar-logo {
+  font-size: 1.1rem;
+  color: var(--color-ai);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.sidebar-brand-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+.sidebar-brand-sub {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* Section labels */
+.sidebar-section-label {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 0.8rem 1rem 0.25rem 1rem;
+}
+
+/* Nav buttons — base */
+.sidebar-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% - 16px);
+  margin: 1px 8px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  font-family: 'Inter', sans-serif;
+}
+.sidebar-nav-btn:hover {
+  background: rgba(59,130,246,0.08);
+  color: var(--text-primary);
+}
+.sidebar-nav-btn.active {
+  background: rgba(59,130,246,0.14);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.sidebar-nav-btn.active .nav-icon {
+  color: var(--color-primary);
+}
+.nav-icon { font-size: 0.85rem; width: 16px; text-align: center; }
+
+/* Streamlit button overrides — sidebar only */
+[data-testid="stSidebar"] .stButton > button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+  padding: 0.45rem 0.75rem !important;
+  width: 100% !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+  justify-content: flex-start !important;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+  background: rgba(59,130,246,0.08) !important;
+  color: var(--text-primary) !important;
+}
+[data-testid="stSidebar"] [data-testid="baseButton-primary"] > button,
+[data-testid="stSidebar"] button[kind="primary"] {
+  background: rgba(59,130,246,0.14) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════ */
+.dash-header {
+  background: linear-gradient(90deg, #0D1421 0%, #0F1929 50%, #0D1421 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -1.5rem;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+.dash-header-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dash-header-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.dash-header-sub {
+  font-size: 0.62rem;
+  color: var(--color-ai);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.dash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.header-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+.header-datetime {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  color: var(--color-success);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.status-dot::before {
+  content: '●';
+  font-size: 0.45rem;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD COMPONENT
+   ═══════════════════════════════════════════════════════════ */
+.dash-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+.dash-card:hover {
+  border-color: var(--border-accent);
+}
+.dash-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent);
+  pointer-events: none;
+}
+
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+}
+.dash-card-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.dash-card-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KPI CARDS
+   ═══════════════════════════════════════════════════════════ */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.1rem;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.15rem 1rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-accent);
+}
+/* Accent top bar */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.kpi-card.ai-accent::before   { background: linear-gradient(90deg, var(--color-ai), transparent); }
+.kpi-card.success::before     { background: linear-gradient(90deg, var(--color-success), transparent); }
+.kpi-card.warning::before     { background: linear-gradient(90deg, var(--color-warning), transparent); }
+.kpi-card.critical::before    { background: linear-gradient(90deg, var(--color-critical), transparent); }
+.kpi-card.neutral::before     { background: linear-gradient(90deg, var(--text-muted), transparent); }
+
+/* Subtle corner glow */
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.kpi-card.ai-accent::after  { background: radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%); }
+.kpi-card.success::after    { background: radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%); }
+.kpi-card.warning::after    { background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%); }
+.kpi-card.critical::after   { background: radial-gradient(circle, rgba(239,68,68,0.05) 0%, transparent 70%); }
+
+.kpi-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-value.small { font-size: 1.5rem; }
+.kpi-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+.kpi-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STATUS BADGES
+   ═══════════════════════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
+}
+.badge-success  {
+  background: rgba(34,197,94,0.12);
+  color: #22C55E;
+  border: 1px solid rgba(34,197,94,0.25);
+}
+.badge-warning  {
+  background: rgba(245,158,11,0.12);
+  color: #F59E0B;
+  border: 1px solid rgba(245,158,11,0.25);
+}
+.badge-critical {
+  background: rgba(239,68,68,0.12);
+  color: #EF4444;
+  border: 1px solid rgba(239,68,68,0.25);
+}
+.badge-info     {
+  background: rgba(59,130,246,0.12);
+  color: #3B82F6;
+  border: 1px solid rgba(59,130,246,0.25);
+}
+.badge-ai       {
+  background: rgba(6,182,212,0.12);
+  color: #06B6D4;
+  border: 1px solid rgba(6,182,212,0.25);
+}
+.badge-neutral  {
+  background: rgba(148,163,184,0.08);
+  color: #94A3B8;
+  border: 1px solid rgba(148,163,184,0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESS BARS
+   ═══════════════════════════════════════════════════════════ */
+.progress-track {
+  background: rgba(30,42,58,0.8);
+  border-radius: 99px;
+  height: 7px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-primary), #60A5FA);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-fill.warning  { background: linear-gradient(90deg, var(--color-warning), #FCD34D); }
+.progress-fill.critical { background: linear-gradient(90deg, var(--color-critical), #F87171); }
+.progress-fill.success  { background: linear-gradient(90deg, var(--color-success), #4ADE80); }
+.progress-fill.ai       { background: linear-gradient(90deg, var(--color-ai), #67E8F9); }
+
+/* ═══════════════════════════════════════════════════════════
+   METRIC ROWS
+   ═══════════════════════════════════════════════════════════ */
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(30,42,58,0.6);
+}
+.metric-row:last-child { border-bottom: none; }
+.metric-row-label {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+.metric-row-value {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INSIGHT CARDS (AI Copilot)
+   ═══════════════════════════════════════════════════════════ */
+.insight-card {
+  background: rgba(13,20,33,0.6);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 0.65rem 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.insight-card:hover {
+  background: rgba(17,27,42,0.9);
+}
+.insight-card.warning  { border-left-color: var(--color-warning); }
+.insight-card.success  { border-left-color: var(--color-success); }
+.insight-card.critical { border-left-color: var(--color-critical); }
+.insight-card.ai       { border-left-color: var(--color-ai); }
+
+.insight-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  line-height: 1.4;
+}
+.insight-body {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DIGITAL TWIN COMPARISON
+   ═══════════════════════════════════════════════════════════ */
+.twin-grid {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+.twin-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1rem;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+.twin-box.simulated {
+  border-color: var(--color-ai);
+  background: linear-gradient(135deg, rgba(6,182,212,0.04) 0%, rgba(13,20,33,1) 100%);
+}
+.twin-arrow {
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  text-align: center;
+  opacity: 0.7;
+}
+.twin-box-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+.twin-metric {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.twin-metric-label {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+.twin-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.65rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER STRIP
+   ═══════════════════════════════════════════════════════════ */
+.section-header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1.25rem 0 0.75rem 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-header::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ALERT BANNERS
+   ═══════════════════════════════════════════════════════════ */
+.alert-banner {
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.alert-banner.warning {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.22);
+  color: #F59E0B;
+}
+.alert-banner.critical {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.22);
+  color: #EF4444;
+}
+.alert-banner.success {
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.22);
+  color: #22C55E;
+}
+.alert-banner.info {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.22);
+  color: #3B82F6;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OUTCOME CARD (Simulation result)
+   ═══════════════════════════════════════════════════════════ */
+.outcome-card {
+  background: linear-gradient(135deg,
+    rgba(6,182,212,0.06) 0%,
+    rgba(59,130,246,0.08) 50%,
+    rgba(17,27,42,1) 100%
+  );
+  border: 1px solid rgba(6,182,212,0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.25rem;
+}
+.outcome-card-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ai);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.outcome-card-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  background: var(--color-ai);
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   METRIC VERTICAL (small stat block)
+   ═══════════════════════════════════════════════════════════ */
+.stat-block {
+  text-align: center;
+  padding: 0.5rem;
+}
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DIVIDERS
+   ═══════════════════════════════════════════════════════════ */
+.dash-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0.65rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════ */
+.dash-footer {
+  margin-top: 2.5rem;
+  padding: 1.25rem 0 0.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.67rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.dash-footer strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STREAMLIT WIDGET OVERRIDES (main content area)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Main action buttons */
+.main .stButton > button {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 0.55rem 1.5rem !important;
+  width: 100% !important;
+  transition: background 0.2s ease, transform 0.1s ease !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.25) !important;
+}
+.main .stButton > button:hover {
+  background: var(--color-primary-dim) !important;
+  transform: translateY(-1px) !important;
+}
+.main .stButton > button:active {
+  transform: translateY(0) !important;
+}
+
+/* Refresh button (secondary) */
+.main [data-testid="baseButton-secondary"] > button,
+.main button[kind="secondary"] {
+  background: rgba(30,42,58,0.7) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.76rem !important;
+  padding: 0.4rem 1rem !important;
+  box-shadow: none !important;
+}
+.main [data-testid="baseButton-secondary"] > button:hover,
+.main button[kind="secondary"]:hover {
+  background: rgba(30,42,58,1) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-accent) !important;
+  transform: none !important;
+}
+
+/* Sliders */
+.stSlider {
+  padding: 0.25rem 0 !important;
+}
+.stSlider > div > div {
+  padding: 0 !important;
+}
+[data-testid="stSlider"] > div > div > div {
+  background: var(--border) !important;
+}
+[data-testid="stSlider"] > div > div > div > div {
+  background: var(--color-primary) !important;
+}
+
+/* Metrics */
+div[data-testid="stMetric"] {
+  background: transparent !important;
+}
+div[data-testid="stMetric"] label {
+  color: var(--text-secondary) !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+div[data-testid="stMetricValue"] {
+  color: var(--text-primary) !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+div[data-testid="stMetricDelta"] {
+  font-size: 0.72rem !important;
+}
+
+/* Select boxes */
+.stSelectbox > div > div {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Expanders */
+.stExpander {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--bg-card) !important;
+  overflow: hidden !important;
+}
+.stExpander > div > div {
+  background: var(--bg-card) !important;
+}
+.stExpander summary {
+  font-size: 0.78rem !important;
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* Dataframes */
+[data-testid="stDataFrame"] {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Plotly chart containers */
+.js-plotly-plot .plotly,
+.js-plotly-plot .plotly div {
+  background: transparent !important;
+}
+
+/* Column gaps */
+[data-testid="column"] {
+  padding: 0 0.3rem !important;
+}
+[data-testid="column"]:first-child { padding-left: 0 !important; }
+[data-testid="column"]:last-child  { padding-right: 0 !important; }
+
+/* Info/warning/error boxes */
+[data-testid="stAlert"] {
+  border-radius: var(--radius-md) !important;
+  font-size: 0.78rem !important;
+}
+
+/* Number input */
+.stNumberInput > div > div {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Tabs */
+[data-testid="stTabs"] [data-testid="stHorizontalBlock"] {
+  gap: 0 !important;
+}
+button[data-testid="stTab"] {
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  padding: 0.5rem 1rem !important;
+  border-bottom: 2px solid transparent !important;
+  background: transparent !important;
+}
+button[data-testid="stTab"][aria-selected="true"] {
+  color: var(--color-primary) !important;
+  border-bottom-color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════ */
+.spacer-sm  { margin-top: 0.5rem;  }
+.spacer-md  { margin-top: 0.85rem; }
+.spacer-lg  { margin-top: 1.25rem; }
+.text-muted { color: var(--text-muted) !important; }
+.text-sec   { color: var(--text-secondary) !important; }
+.text-sm    { font-size: 0.74rem; }
+.text-xs    { font-size: 0.66rem; }
+.fw-600     { font-weight: 600; }
+.fw-700     { font-weight: 700; }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .kpi-value { font-size: 1.6rem; }
+  .kpi-grid  { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .dash-header-right { display: none; }
+  .kpi-grid  { grid-template-columns: repeat(2, 1fr); }
+  .twin-grid { grid-template-columns: 1fr; }
+  .twin-arrow { display: none; }
+}
+
+
+
+/* App Shell Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* Fixed Sidebar */
+.app-sidebar {
+  width: 228px;
+  min-width: 228px;
+  max-width: 228px;
+  background: linear-gradient(180deg, #0A1220 0%, #0D1421 100%);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.sidebar-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: calc(100% - 16px);
+  margin: 2px 8px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.48rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+}
+
+.sidebar-nav-btn:hover {
+  background: rgba(59,130,246,0.08);
+  color: var(--text-primary);
+}
+
+.sidebar-nav-btn.active {
+  background: rgba(59,130,246,0.14);
+  color: var(--color-primary);
+  font-weight: 600;
+  border-color: rgba(59,130,246,0.25);
+}
+
+.sidebar-nav-btn .nav-icon {
+  font-size: 0.85rem;
+  width: 16px;
+  text-align: center;
+}
+
+/* Main Content Area */
+.app-main {
+  margin-left: 228px;
+  flex: 1;
+  min-width: 0;
+  padding: 0 1.5rem 2.5rem 1.5rem;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar controls */
+.top-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.refresh-btn {
+  background: rgba(30,42,58,0.7);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.refresh-btn:hover {
+  background: rgba(30,42,58,1);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+}
+
+.refresh-btn.spinning .spin-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Grid helper layouts */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.75rem;
+}
+
+.grid-2col-equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.grid-copilot {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Slider Controls */
+.slider-group {
+  margin-bottom: 1.25rem;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.slider-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.slider-val-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+  background: rgba(59,130,246,0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.custom-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--border);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid #080D17;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(59,130,246,0.5);
+  transition: transform 0.1s ease;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.slider-caption {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+
+/* Action Primary Button */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-family: 'Inter', sans-serif;
+  padding: 0.65rem 1.5rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dim);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+  margin-top: 0.5rem;
+}
+
+.data-table th {
+  background: rgba(30,42,58,0.5);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.data-table td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid rgba(30,42,58,0.4);
+  color: var(--text-primary);
+}
+
+.data-table tr:hover td {
+  background: rgba(59,130,246,0.03);
+}
+
+/* Tab panes */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading Overlay / Error */
+.loading-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--color-ai);
+}
+
+@media (max-width: 1024px) {
+  .app-sidebar {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .app-container {
+    flex-direction: column;
+  }
+  .app-main {
+    margin-left: 0;
+    padding: 0 1rem 2rem 1rem;
+  }
+  .grid-2col, .grid-3col, .grid-copilot {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Fixed Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">⬡</div>
+        <div class="sidebar-brand-name">AI RETAIL</div>
+        <div class="sidebar-brand-sub">Decision Intelligence</div>
+      </div>
+
+      <nav class="sidebar-nav-list">
+        <div class="sidebar-section-label">OVERVIEW</div>
+        <button class="sidebar-nav-btn active" onclick="switchTab('overview', this)">
+          <span class="nav-icon">◉</span> Overview
+        </button>
+
+        <div class="sidebar-section-label">FORECASTING</div>
+        <button class="sidebar-nav-btn" onclick="switchTab('forecast', this)">
+          <span class="nav-icon">📈</span> Demand Forecast
+        </button>
+
+        <div class="sidebar-section-label">INVENTORY</div>
+        <button class="sidebar-nav-btn" onclick="switchTab('inventory', this)">
+          <span class="nav-icon">📦</span> Inventory Health
+        </button>
+        <button class="sidebar-nav-btn" onclick="switchTab('replenishment', this)">
+          <span class="nav-icon">↻</span> Replenishment
+        </button>
+
+        <div class="sidebar-section-label">INTELLIGENCE</div>
+        <button class="sidebar-nav-btn" onclick="switchTab('risk', this)">
+          <span class="nav-icon">⚠</span> Risk Intelligence
+        </button>
+        <button class="sidebar-nav-btn" onclick="switchTab('copilot', this)">
+          <span class="nav-icon">🤖</span> AI Copilot
+        </button>
+
+        <div class="sidebar-section-label">SIMULATION</div>
+        <button class="sidebar-nav-btn" onclick="switchTab('digital_twin', this)">
+          <span class="nav-icon">◈</span> Digital Twin
+        </button>
+        <button class="sidebar-nav-btn" onclick="switchTab('simulator', this)">
+          <span class="nav-icon">⧫</span> What-If Simulator
+        </button>
+
+        <div class="sidebar-section-label">OPERATIONS</div>
+        <button class="sidebar-nav-btn" onclick="switchTab('mlops', this)">
+          <span class="nav-icon">⚙</span> MLOps Monitoring
+        </button>
+      </nav>
+
+      <div style="margin-top:auto; padding: 1rem 0.5rem;">
+        <hr class="dash-divider">
+        <div class="sidebar-section-label" style="opacity:0.45; padding-top:0.5rem">
+          ⚙ Settings &nbsp;·&nbsp; v1.0.0
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- Sticky Top Header -->
+      <header class="dash-header">
+        <div class="dash-header-brand">
+          <div class="dash-header-title">AI Retail Decision Intelligence Platform</div>
+          <div class="dash-header-sub">Forecast · Optimize · Predict · Decide</div>
+        </div>
+        <div class="dash-header-right">
+          <div class="header-meta">
+            <div class="header-datetime" id="header-datetime">Loading...</div>
+            <div class="status-dot">System Operational</div>
+          </div>
+          <span class="badge badge-ai" style="font-size:0.65rem">ARIMA/SARIMA</span>
+        </div>
+      </header>
+
+      <!-- Action Row: Last update & Refresh button -->
+      <div class="top-action-bar">
+        <div id="last-updated-text" style="font-size:0.68rem; color:var(--text-muted)">Connecting to backend...</div>
+        <button class="refresh-btn" id="refresh-btn" onclick="triggerRefresh()">
+          <span class="spin-icon">↻</span> Refresh
+        </button>
+      </div>
+
+      <!-- Alert Banner Container for API Connection status -->
+      <div id="api-banner" style="display:none; margin-bottom:1rem"></div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: OVERVIEW                                                       -->
+      <!-- =================================================================== -->
+      <div id="tab-overview" class="tab-content active">
+        <div class="section-header">EXECUTIVE KPIs</div>
+
+        <!-- 5 KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">DEMAND FORECAST</div>
+            <div class="kpi-value" id="kpi-forecast">--</div>
+            <div class="kpi-sub">units · next period</div>
+            <div style="margin-top:0.45rem"><span class="badge badge-ai">ARIMA/SARIMA</span></div>
+          </div>
+
+          <div class="kpi-card ai-accent">
+            <div class="kpi-label">EXPECTED REVENUE</div>
+            <div class="kpi-value" id="kpi-revenue">--</div>
+            <div class="kpi-sub">based on forecast × price</div>
+            <div style="margin-top:0.45rem"><span class="badge badge-info">PROJECTED</span></div>
+          </div>
+
+          <div class="kpi-card success">
+            <div class="kpi-label">EXPECTED PROFIT</div>
+            <div class="kpi-value" id="kpi-profit">--</div>
+            <div class="kpi-sub" id="kpi-margin-sub">25% gross margin</div>
+            <div style="margin-top:0.45rem"><span class="badge badge-success" id="kpi-margin-badge">25% MARGIN</span></div>
+          </div>
+
+          <div class="kpi-card" id="kpi-inv-card">
+            <div class="kpi-label">CURRENT INVENTORY</div>
+            <div class="kpi-value" id="kpi-inventory">--</div>
+            <div class="kpi-sub">units currently on hand</div>
+            <div style="margin-top:0.45rem"><span class="badge" id="kpi-inv-badge">--</span></div>
+          </div>
+
+          <div class="kpi-card" id="kpi-risk-card">
+            <div class="kpi-label">BUSINESS RISK</div>
+            <div class="kpi-value" id="kpi-risk-val">--</div>
+            <div class="kpi-sub" id="kpi-risk-sub">Score: -- / 100</div>
+            <div style="margin-top:0.45rem"><span class="badge" id="kpi-risk-badge">SCORE --</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem"></div>
+
+        <!-- Row 2: Business Health + Demand Intel | Forecast Chart -->
+        <div class="grid-2col">
+          <div>
+            <!-- Business Health -->
+            <div class="dash-card" style="margin-bottom:0.75rem">
+              <div class="dash-card-header">
+                <span class="dash-card-icon">🏢</span>
+                <span class="dash-card-title">BUSINESS HEALTH</span>
+              </div>
+              <div style="margin-bottom:0.6rem" id="bh-badge-container">
+                <span class="badge badge-success">✓ HEALTHY</span>
+              </div>
+              <div style="font-size:0.78rem;color:var(--text-primary);font-weight:500;margin-bottom:0.3rem" id="bh-summary">
+                Loading business health...
+              </div>
+              <div style="font-size:0.68rem;color:var(--text-muted)" id="bh-detail">
+                All systems nominal
+              </div>
+            </div>
+
+            <!-- Demand Intelligence -->
+            <div class="dash-card" id="demand-intel-card-overview">
+              <!-- Reusable component injected by JS -->
+            </div>
+          </div>
+
+          <!-- Forecast Chart -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="dash-card-icon">📈</span>
+              <span class="dash-card-title">DEMAND FORECAST</span>
+              <span style="margin-left:auto;font-size:0.65rem;color:var(--text-muted)">Actual vs Forecasted Demand</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 3fr 1.2fr; gap:0.75rem">
+              <div id="forecast-chart-container" style="min-height:280px"></div>
+              <div class="dash-card" style="background:var(--bg-secondary); border-color:var(--border); padding:0.8rem">
+                <div class="dash-card-header" style="margin-bottom:0.4rem">
+                  <span class="dash-card-title">FORECAST METRICS</span>
+                </div>
+                <div style="text-align:center;padding:0.3rem 0 0.6rem">
+                  <div style="font-size:1.8rem;font-weight:800;color:var(--color-primary);line-height:1" id="fc-metric-val">--</div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);text-transform:uppercase;margin-top:3px">units · next period</div>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-row-label">Confidence</span>
+                  <span class="metric-row-value" style="color:var(--color-success)" id="fc-metric-conf">99%</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-row-label">Trend</span>
+                  <span class="metric-row-value" id="fc-metric-trend">--</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-row-label">Range</span>
+                  <span class="metric-row-value" id="fc-metric-range">--</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-row-label">Model MAE</span>
+                  <span class="metric-row-value" id="fc-metric-mae">4.2</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-row-label">Horizon</span>
+                  <span class="metric-row-value">7 periods</span>
+                </div>
+                <div style="margin-top:0.65rem">
+                  <span class="badge badge-ai">● LIVE</span>&nbsp;
+                  <span class="badge badge-info">ARIMA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem"></div>
+
+        <!-- Row 3: Inventory | Risk | Replenishment -->
+        <div class="grid-3col">
+          <div id="inv-card-overview"></div>
+          <div class="dash-card" id="risk-card-overview"></div>
+          <div id="rep-card-overview"></div>
+        </div>
+
+        <div style="margin-top: 1rem"></div>
+
+        <!-- Row 4: AI Copilot | Supply Chain -->
+        <div class="grid-copilot">
+          <div class="dash-card" id="copilot-panel-overview"></div>
+          <div id="sc-card-overview"></div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: DEMAND FORECAST                                                -->
+      <!-- =================================================================== -->
+      <div id="tab-forecast" class="tab-content">
+        <div class="section-header">DEMAND FORECAST</div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">📈</span>
+            <span class="dash-card-title">SARIMA/ARIMA TIME-SERIES PROJECTIONS</span>
+          </div>
+          <div id="forecast-chart-big" style="min-height:340px"></div>
+        </div>
+
+        <div style="margin-top:1rem"></div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">📋</span>
+            <span class="dash-card-title">FORECAST SERIES DATA (7 PERIOD HORIZON)</span>
+          </div>
+          <table class="data-table" id="forecast-series-table">
+            <thead>
+              <tr>
+                <th>Date / Period</th>
+                <th>Forecast Demand (Units)</th>
+                <th>Lower Bound (95% CI)</th>
+                <th>Upper Bound (95% CI)</th>
+                <th>Model Confidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:1rem"></div>
+        <div class="grid-2col-equal">
+          <div class="dash-card" id="demand-intel-card-page"></div>
+          <div id="rep-card-page"></div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: INVENTORY HEALTH                                               -->
+      <!-- =================================================================== -->
+      <div id="tab-inventory" class="tab-content">
+        <div class="section-header">INVENTORY HEALTH</div>
+        <div class="grid-2col-equal">
+          <div id="inv-card-page"></div>
+          <div id="rep-card-page2"></div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: AUTONOMOUS REPLENISHMENT                                      -->
+      <!-- =================================================================== -->
+      <div id="tab-replenishment" class="tab-content">
+        <div class="section-header">AUTONOMOUS REPLENISHMENT</div>
+        <div id="rep-card-standalone" style="margin-bottom:1rem"></div>
+        <div class="grid-2col-equal">
+          <div id="inv-card-page2"></div>
+          <div id="sc-card-page"></div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: RISK INTELLIGENCE                                              -->
+      <!-- =================================================================== -->
+      <div id="tab-risk" class="tab-content">
+        <div class="section-header">RISK INTELLIGENCE</div>
+        <div class="dash-card" id="risk-card-page" style="margin-bottom:1rem"></div>
+        <div class="grid-2col-equal">
+          <div id="sc-card-page2"></div>
+          <div class="dash-card" id="demand-intel-card-page2"></div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: AI COPILOT                                                     -->
+      <!-- =================================================================== -->
+      <div id="tab-copilot" class="tab-content">
+        <div class="section-header">AI BUSINESS COPILOT</div>
+        <div class="grid-copilot">
+          <div class="dash-card" id="copilot-panel-page"></div>
+          <div>
+            <div class="dash-card" id="vertical-kpi-panel" style="margin-bottom:0.75rem"></div>
+            <div class="dash-card" id="bh-card-page"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: DIGITAL TWIN                                                   -->
+      <!-- =================================================================== -->
+      <div id="tab-digital_twin" class="tab-content">
+        <div class="section-header">DIGITAL TWIN — STATE COMPARISON</div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">◈</span>
+            <span class="dash-card-title">OPERATIONAL STATE COMPARISON</span>
+            <span style="margin-left:auto"><span class="badge badge-ai">Digital Twin</span></span>
+          </div>
+          <div style="font-size:0.76rem;color:var(--text-secondary);margin-bottom:1.25rem">
+            Compare the current operational baseline against a simulated inventory scenario in real time.
+          </div>
+
+          <div class="slider-group" style="max-width:550px">
+            <div class="slider-header">
+              <span class="slider-label">Simulated Inventory Increase (%)</span>
+              <span class="slider-val-badge" id="dt-slider-val">+20%</span>
+            </div>
+            <input type="range" min="0" max="100" step="10" value="20" class="custom-slider" id="dt-slider" oninput="updateDigitalTwinLive(this.value)">
+            <div class="slider-caption">Simulate increasing warehouse inventory to measure holding costs and stockout risk mitigation.</div>
+          </div>
+
+          <div class="twin-grid" style="margin: 1.5rem 0 1rem 0">
+            <div class="twin-box">
+              <div class="twin-box-label">◉ CURRENT STATE</div>
+              <div style="margin-bottom:0.75rem">
+                <div class="twin-metric" id="dt-cur-inv">100</div>
+                <div class="twin-metric-label">units in inventory</div>
+              </div>
+              <div style="margin-bottom:0.75rem">
+                <div class="twin-metric" id="dt-cur-cost">₹1,000</div>
+                <div class="twin-metric-label">holding cost (₹10/unit)</div>
+              </div>
+              <div>
+                <div class="twin-metric-label" style="margin-bottom:4px">Stockout Status</div>
+                <span id="dt-cur-status"><span class="badge badge-success">✓ SAFE</span></span>
+              </div>
+            </div>
+
+            <div class="twin-arrow">→</div>
+
+            <div class="twin-box simulated">
+              <div class="twin-box-label" style="color:var(--color-ai)">◈ SIMULATED STATE</div>
+              <div style="margin-bottom:0.75rem">
+                <div class="twin-metric" style="color:var(--color-ai)" id="dt-sim-inv">120</div>
+                <div class="twin-metric-label" id="dt-sim-inv-delta">units (+20)</div>
+              </div>
+              <div style="margin-bottom:0.75rem">
+                <div class="twin-metric" id="dt-sim-cost">₹1,200</div>
+                <div class="twin-metric-label" id="dt-sim-cost-delta">holding cost (+₹200)</div>
+              </div>
+              <div>
+                <div class="twin-metric-label" style="margin-bottom:4px">Stockout Status</div>
+                <span id="dt-sim-status"><span class="badge badge-success">✓ SAFE</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-banner info" id="dt-interpretation">
+            ◇ Both states are safe. Increasing inventory adds holding cost with no stockout benefit.
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: WHAT-IF SIMULATOR                                              -->
+      <!-- =================================================================== -->
+      <div id="tab-simulator" class="tab-content">
+        <div class="section-header">WHAT-IF SIMULATOR</div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">⧫</span>
+            <span class="dash-card-title">WHAT-IF SIMULATION ENGINE</span>
+            <span style="margin-left:auto"><span class="badge badge-ai">Live API</span></span>
+          </div>
+          <div style="font-size:0.76rem;color:var(--text-secondary);margin-bottom:1.5rem">
+            Adjust strategic parameters and run simulations against the deployed retail intelligence engine.
+          </div>
+
+          <div class="grid-2col-equal">
+            <!-- Left: Controls -->
+            <div>
+              <!-- Slider 1: Discount -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">💰 Price Discount (%)</span>
+                  <span class="slider-val-badge" id="sim-disc-val">10%</span>
+                </div>
+                <input type="range" min="0" max="50" step="5" value="10" class="custom-slider" id="sim-disc-slider" oninput="document.getElementById('sim-disc-val').innerText = this.value + '%'">
+                <div class="slider-caption">Percentage price discount applied to product base price (₹120).</div>
+              </div>
+
+              <!-- Slider 2: Delay -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">🚚 Supplier Delay (days)</span>
+                  <span class="slider-val-badge" id="sim-delay-val">10 days</span>
+                </div>
+                <input type="range" min="0" max="30" step="1" value="10" class="custom-slider" id="sim-delay-slider" oninput="document.getElementById('sim-delay-val').innerText = this.value + ' days'">
+                <div class="slider-caption">Simulated supplier lead-time delay in days for supply chain stress testing.</div>
+              </div>
+
+              <!-- Slider 3: Inventory Increase -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">📦 Inventory Increase (%)</span>
+                  <span class="slider-val-badge" id="sim-inv-val">20%</span>
+                </div>
+                <input type="range" min="0" max="100" step="10" value="20" class="custom-slider" id="sim-inv-slider" oninput="document.getElementById('sim-inv-val').innerText = this.value + '%'">
+                <div class="slider-caption">Simulated warehouse inventory expansion for Digital Twin simulation.</div>
+              </div>
+
+              <button class="btn-primary" id="sim-run-btn" onclick="executeSimulation()">
+                <span>▶ Run Simulation</span>
+              </button>
+            </div>
+
+            <!-- Right: Results -->
+            <div id="simulation-results-container">
+              <div class="dash-card" style="text-align:center; padding:3rem 1rem; border-style:dashed">
+                <div style="font-size:2.5rem; margin-bottom:0.6rem; color:var(--color-primary)">⧫</div>
+                <div style="font-size:0.88rem; font-weight:600; color:var(--text-primary); margin-bottom:0.4rem">
+                  Interactive Simulation Ready
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-secondary); max-width:300px; margin:0 auto">
+                  Adjust the sliders on the left and click <strong>Run Simulation</strong> to query the live FastAPI <code>/simulate</code> endpoint.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB: MLOPS MONITORING                                               -->
+      <!-- =================================================================== -->
+      <div id="tab-mlops" class="tab-content">
+        <div class="section-header">MLOPS MONITORING</div>
+        <div class="grid-3col">
+          <!-- Model Health -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="dash-card-icon">⚙</span>
+              <span class="dash-card-title">MODEL HEALTH</span>
+              <span style="margin-left:auto"><span class="badge badge-success" id="ml-status-badge">● GOOD</span></span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">MAE</span>
+              <span class="metric-row-value" style="color:var(--color-success)" id="ml-mae-val">4.2</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">RMSE</span>
+              <span class="metric-row-value" id="ml-rmse-val">5.8</span>
+            </div>
+            <div class="metric-row" style="border-bottom:none">
+              <span class="metric-row-label">Model Type</span>
+              <span class="metric-row-value">ARIMA</span>
+            </div>
+            <div id="mae-gauge-chart" style="height:120px; margin-top:0.4rem"></div>
+            <div style="text-align:center;font-size:0.65rem;color:var(--text-muted);margin-top:-6px">
+              MAE threshold: 5.0
+            </div>
+          </div>
+
+          <!-- Data Drift -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="dash-card-icon">📡</span>
+              <span class="dash-card-title">DATA DRIFT</span>
+              <span style="margin-left:auto"><span class="badge badge-warning" id="ml-drift-badge">⚠ DETECTED</span></span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Drift Score</span>
+              <span class="metric-row-value" style="color:var(--color-warning)" id="ml-drift-score">42.8</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Threshold</span>
+              <span class="metric-row-value">20.0</span>
+            </div>
+            <div class="metric-row" style="border-bottom:none">
+              <span class="metric-row-label">Status</span>
+              <span class="metric-row-value" id="ml-drift-status">Above threshold</span>
+            </div>
+            <div id="drift-bar-chart" style="height:80px; margin-top:0.4rem"></div>
+            <div style="text-align:center;font-size:0.65rem;color:var(--text-muted);margin-top:-4px">
+              Score vs Threshold (20.0)
+            </div>
+            <div class="alert-banner warning" style="margin-top:0.65rem;font-size:0.72rem" id="ml-drift-alert">
+              ⚠ Data drift detected. Distribution shift from historical baseline.
+            </div>
+          </div>
+
+          <!-- Retraining Action -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="dash-card-icon">↻</span>
+              <span class="dash-card-title">MODEL ACTION</span>
+              <span style="margin-left:auto"><span class="badge badge-critical" id="ml-action-badge">↻ RETRAIN</span></span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Action</span>
+              <span class="metric-row-value" id="ml-action-val">RETRAIN_MODEL</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Trigger</span>
+              <span class="metric-row-value">Drift &gt; 20.0</span>
+            </div>
+            <div class="metric-row" style="border-bottom:none">
+              <span class="metric-row-label">Priority</span>
+              <span class="metric-row-value"><span class="badge badge-critical">HIGH</span></span>
+            </div>
+            <div class="alert-banner critical" style="margin-top:0.85rem;font-size:0.72rem" id="ml-action-alert">
+              ↻ Data drift has exceeded the threshold. Model retraining is recommended to restore forecast accuracy.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem"></div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">🔬</span>
+            <span class="dash-card-title">TECHNICAL MLOps SPECIFICATION</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Current Metric</th>
+                <th>Operational Threshold</th>
+                <th>Health Status</th>
+                <th>Diagnostic Protocol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Model Accuracy</strong></td>
+                <td>MAE: 4.2 / RMSE: 5.8</td>
+                <td>MAE &le; 5.0</td>
+                <td><span class="badge badge-success">● HEALTHY</span></td>
+                <td>ARIMA residuals within 95% confidence interval</td>
+              </tr>
+              <tr>
+                <td><strong>Distribution Drift</strong></td>
+                <td>Score: 42.8</td>
+                <td>Score &le; 20.0</td>
+                <td><span class="badge badge-warning">⚠ DRIFT DETECTED</span></td>
+                <td>Mean absolute deviation between historical &amp; recent window</td>
+              </tr>
+              <tr>
+                <td><strong>Automated Pipeline</strong></td>
+                <td>RETRAIN_MODEL</td>
+                <td>Trigger on Drift / Error Spike</td>
+                <td><span class="badge badge-critical">↻ ACTION REQUIRED</span></td>
+                <td>Retraining agent queued with updated historical series</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="dash-footer">
+        <strong>AI Retail Decision Intelligence Platform</strong><br>
+        Built with Python &bull; FastAPI &bull; Streamlit &bull; ARIMA/SARIMA &nbsp;&nbsp;|&nbsp;&nbsp; v1.0.0
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Global state
+    let globalData = null;
+    let activeTab = 'overview';
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      const options = { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const el = document.getElementById('header-datetime');
+      if (el) el.innerText = now.toLocaleDateString('en-US', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Tab Navigation
+    function switchTab(tabKey, btnElement) {
+      activeTab = tabKey;
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('tab-' + tabKey);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.sidebar-nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const btn = document.querySelector(`[onclick*="switchTab('${tabKey}'"]`);
+        if (btn) btn.classList.add('active');
+      }
+
+      // Trigger Plotly redraw on tab switch to ensure responsive sizing
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 50);
+    }
+
+    // Main Data Fetcher
+    async function fetchData() {
+      const refreshBtn = document.getElementById('refresh-btn');
+      if (refreshBtn) refreshBtn.classList.add('spinning');
+      const banner = document.getElementById('api-banner');
+
+      try {
+        // Attempt relative fetch, fallback to deployed domain
+        let res;
+        try {
+          res = await fetch('/forecast', { cache: 'no-store' });
+        } catch(e) {
+          res = await fetch('https://ai-retail-decision-intelligence-pla.vercel.app/forecast');
+        }
+
+        if (!res.ok) throw new Error('API returned status ' + res.status);
+        const data = await res.json();
+        globalData = data;
+
+        if (banner) banner.style.display = 'none';
+        renderAllComponents(data);
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('last-updated-text').innerText = 'Last updated: ' + timeStr;
+      } catch (err) {
+        console.error('Fetch error:', err);
+        if (banner) {
+          banner.style.display = 'block';
+          banner.innerHTML = `<div class="alert-banner critical">
+            ⚡ <strong>Cannot reach Retail AI API</strong><br>
+            <span style="font-size:0.72rem;opacity:0.85">Endpoint: <code>/forecast</code> &bull; Error: ${err.message}</span>
+          </div>`;
+        }
+      } finally {
+        if (refreshBtn) refreshBtn.classList.remove('spinning');
+      }
+    }
+
+    function triggerRefresh() {
+      fetchData();
+    }
+
+    // HTML Generator for Cards
+    function generateInventoryCardHTML(data) {
+      const inv = data.inventory ?? 100;
+      const rec = data.recommended_stock ?? 38;
+      const safe = data.safety_stock ?? 53;
+      const excess = data.excess_inventory ?? 0;
+      const risk = (data.stockout_risk || 'LOW').toUpperCase();
+      const utilPct = Math.min(100, Math.max(0, (rec / Math.max(inv, 1)) * 100));
+      const excessPct = Math.min(100, Math.max(0, (excess / Math.max(inv, 1)) * 100));
+
+      const invBadgeStyle = excess > 0 ? 'warning' : 'success';
+      const invBadgeText = excess > 0 ? '⚠ EXCESS' : '✓ OPTIMAL';
+      const riskBadgeStyle = risk === 'HIGH' ? 'critical' : (risk === 'MEDIUM' ? 'warning' : 'success');
+      const alertStyle = excess > 0 ? 'warning' : 'success';
+      const alertMsg = excess > 0 
+        ? `⚠ Excess inventory of <strong>${excess} units</strong> detected. Consider reducing stock.`
+        : `✓ Inventory levels are optimal.`;
+
+      return `
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">📦</span>
+            <span class="dash-card-title">INVENTORY HEALTH</span>
+            <span style="margin-left:auto"><span class="badge badge-${invBadgeStyle}">${invBadgeText}</span></span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Current Inventory</span>
+            <span class="metric-row-value">${inv} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Recommended Level</span>
+            <span class="metric-row-value">${rec} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Safety Stock</span>
+            <span class="metric-row-value">${safe} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Excess Inventory</span>
+            <span class="metric-row-value" style="color:var(--color-warning)">${excess} units</span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Stockout Risk</span>
+            <span class="metric-row-value"><span class="badge badge-${riskBadgeStyle}">${risk}</span></span>
+          </div>
+          <div style="margin-top:0.85rem">
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:4px">Inventory Utilisation</div>
+            <div class="progress-track"><div class="progress-fill ${excess > 20 ? 'warning' : 'success'}" style="width:${utilPct.toFixed(1)}%"></div></div>
+            <div style="font-size:0.65rem;color:var(--text-secondary);text-align:right;margin-top:3px">${utilPct.toFixed(0)}%</div>
+          </div>
+          <div style="margin-top:0.65rem">
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:4px">Excess Inventory</div>
+            <div class="progress-track"><div class="progress-fill warning" style="width:${excessPct.toFixed(1)}%"></div></div>
+            <div style="font-size:0.65rem;color:var(--text-secondary);text-align:right;margin-top:3px">${excessPct.toFixed(0)}%</div>
+          </div>
+          <div class="alert-banner ${alertStyle}" style="margin-top:0.65rem;font-size:0.74rem">${alertMsg}</div>
+        </div>
+      `;
+    }
+
+    function generateReplenishmentCardHTML(data) {
+      const rep = data.replenishment || {};
+      const action = rep.action || 'NO_ACTION';
+      const reqStock = rep.required_stock ?? 85;
+      const curInv = rep.current_inventory ?? 100;
+      const reorderQty = rep.reorder_quantity ?? 0;
+      const orderDate = rep.recommended_order_date || '—';
+      const leadTime = rep.lead_time_days ?? 5;
+      const conf = rep.confidence ?? 99;
+
+      const isNoAction = action === 'NO_ACTION';
+      const badgeStyle = isNoAction ? 'success' : 'critical';
+      const badgeIcon = isNoAction ? '✓' : '⚡';
+      const badgeLabel = isNoAction ? 'NO ACTION' : 'REORDER NOW';
+      const rationale = isNoAction 
+        ? 'Current inventory exceeds required stock. No reorder needed.' 
+        : `Stock deficit detected. Reorder ${reorderQty} units immediately.`;
+      const coveragePct = Math.min(100, Math.max(0, (curInv / Math.max(reqStock, 1)) * 100));
+      const curColor = curInv >= reqStock ? 'var(--color-success)' : 'var(--color-critical)';
+
+      return `
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">↻</span>
+            <span class="dash-card-title">AUTONOMOUS REPLENISHMENT</span>
+            <span style="margin-left:auto"><span class="badge badge-${badgeStyle}">${badgeIcon} ${badgeLabel}</span></span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Required Stock</span>
+            <span class="metric-row-value">${reqStock} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Current Inventory</span>
+            <span class="metric-row-value" style="color:${curColor}">${curInv} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Reorder Quantity</span>
+            <span class="metric-row-value">${reorderQty} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Order Date</span>
+            <span class="metric-row-value" style="font-size:0.76rem">${orderDate}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Lead Time</span>
+            <span class="metric-row-value">${leadTime} days</span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Confidence</span>
+            <span class="metric-row-value" style="color:var(--color-success)">${conf}%</span>
+          </div>
+          <div style="margin-top:0.85rem">
+            <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">
+              <span>Stock Coverage (Current vs Required)</span>
+              <span>${coveragePct.toFixed(0)}%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill ${curInv >= reqStock ? 'success' : 'critical'}" style="width:${coveragePct.toFixed(1)}%"></div></div>
+          </div>
+          <div class="alert-banner ${badgeStyle}" style="margin-top:0.65rem;font-size:0.74rem">${badgeIcon} ${rationale}</div>
+        </div>
+      `;
+    }
+
+    function generateDemandIntelCardHTML(data) {
+      const spike = Boolean(data.spike_detected);
+      const ratio = Number(data.spike_ratio || 1.0);
+      const style = spike ? 'warning' : 'success';
+      const icon = spike ? '⚠' : '✓';
+      const label = spike ? 'DEMAND SPIKE DETECTED' : 'DEMAND NORMAL';
+      const detail = spike
+        ? `Recent demand is <strong>${ratio.toFixed(2)}×</strong> above baseline. Monitor closely for stockout risk.`
+        : `Demand is within expected baseline range.`;
+      const ratioPct = Math.min(100, (ratio / 4.0) * 100);
+
+      return `
+        <div class="dash-card-header">
+          <span class="dash-card-icon">📊</span>
+          <span class="dash-card-title">DEMAND INTELLIGENCE</span>
+          <span style="margin-left:auto"><span class="badge badge-${style}">${icon} ${label}</span></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-row-label">Spike Ratio</span>
+          <span class="metric-row-value" style="color:var(--color-${style})">${ratio.toFixed(2)}×</span>
+        </div>
+        <div style="margin-top:0.7rem">
+          <div style="font-size:0.65rem;color:var(--text-muted);margin-bottom:3px">Demand Intensity (vs 4× baseline)</div>
+          <div class="progress-track"><div class="progress-fill ${style}" style="width:${ratioPct.toFixed(1)}%"></div></div>
+        </div>
+        <div class="alert-banner ${style}" style="margin-top:0.65rem;font-size:0.74rem">${detail}</div>
+      `;
+    }
+
+    function generateSupplyChainCardHTML(data) {
+      const sc = data.supply_chain || {};
+      const delay = sc.supplier_delay ?? 10;
+      const risk = (sc.risk || 'HIGH').toUpperCase();
+      const safeRec = sc.recommended_safety_stock ?? 16;
+      const riskStyle = risk === 'HIGH' ? 'critical' : (risk === 'MEDIUM' ? 'warning' : 'success');
+      const reason = delay > 7 
+        ? `Supplier delay of ${delay} days exceeds 7-day threshold.`
+        : `Supply chain within normal parameters.`;
+      const delayPct = Math.min(100, (delay / 30) * 100);
+      const delayColor = delay > 7 ? 'var(--color-critical)' : 'var(--color-success)';
+
+      return `
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-icon">🚚</span>
+            <span class="dash-card-title">SUPPLY CHAIN RISK</span>
+            <span style="margin-left:auto"><span class="badge badge-${riskStyle}">${risk}</span></span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Supplier Delay</span>
+            <span class="metric-row-value" style="color:${delayColor}">${delay} days</span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Rec. Safety Stock</span>
+            <span class="metric-row-value">${safeRec} units</span>
+          </div>
+          <div style="margin-top:0.7rem">
+            <div style="font-size:0.65rem;color:var(--text-muted);margin-bottom:3px">Delay Severity (vs 30-day max)</div>
+            <div class="progress-track"><div class="progress-fill ${riskStyle}" style="width:${delayPct.toFixed(1)}%"></div></div>
+          </div>
+          <div class="alert-banner ${riskStyle}" style="margin-top:0.65rem;font-size:0.74rem">🚚 ${reason}</div>
+        </div>
+      `;
+    }
+
+    function generateRiskCardContent(containerId, data) {
+      const cat = (data.risk_category || data.risk || 'LOW').toUpperCase();
+      const score = Number(data.risk_score ?? 6);
+      const spike = Boolean(data.spike_detected);
+      const spikeRatio = Number(data.spike_ratio ?? 1.0);
+      const sc = data.supply_chain || {};
+      const scRisk = (sc.risk || 'LOW').toUpperCase();
+      const status = (data.status || 'HEALTHY').toUpperCase();
+
+      const catStyle = cat === 'HIGH' ? 'critical' : (cat === 'MEDIUM' ? 'warning' : 'success');
+      const catColor = cat === 'HIGH' ? '#EF4444' : (cat === 'MEDIUM' ? '#F59E0B' : '#22C55E');
+      const scStyle = scRisk === 'HIGH' ? 'critical' : (scRisk === 'MEDIUM' ? 'warning' : 'success');
+      const statusStyle = status === 'HEALTHY' ? 'success' : 'warning';
+
+      const html = `
+        <div style="display:grid; grid-template-columns: 1fr 1.6fr; gap:0.75rem; align-items:center">
+          <div>
+            <div class="dash-card-header">
+              <span class="dash-card-icon">⚠</span>
+              <span class="dash-card-title">RISK INTELLIGENCE</span>
+            </div>
+            <div id="${containerId}-gauge" style="height:140px; margin-top:-10px"></div>
+            <div style="text-align:center;margin-top:-6px">
+              <span class="badge badge-${catStyle}">${cat} RISK</span>
+            </div>
+          </div>
+          <div style="padding-top:0.25rem">
+            <div class="metric-row">
+              <span class="metric-row-label">Risk Score</span>
+              <span class="metric-row-value" style="color:${catColor};font-size:1rem;font-weight:700">
+                ${score} <span style="font-size:0.72rem;color:var(--text-muted);font-weight:400">/ 100</span>
+              </span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Demand Spike</span>
+              <span class="metric-row-value"><span class="badge badge-${spike ? 'warning' : 'success'}">${spike ? 'DETECTED' : 'NONE'}</span></span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Spike Ratio</span>
+              <span class="metric-row-value">${spikeRatio.toFixed(2)}×</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-row-label">Supply Chain</span>
+              <span class="metric-row-value"><span class="badge badge-${scStyle}">${scRisk}</span></span>
+            </div>
+            <div class="metric-row" style="border-bottom:none">
+              <span class="metric-row-label">Overall Status</span>
+              <span class="metric-row-value"><span class="badge badge-${statusStyle}">${status}</span></span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const target = document.getElementById(containerId);
+      if (target) {
+        target.innerHTML = html;
+        renderRiskGauge(`${containerId}-gauge`, score, catColor);
+      }
+    }
+
+    function renderRiskGauge(divId, score, color) {
+      const trace = {
+        type: "indicator",
+        mode: "gauge+number",
+        value: score,
+        number: { font: { size: 24, color: "#F8FAFC", family: "Inter" } },
+        gauge: {
+          axis: { range: [0, 100], visible: false },
+          bar: { color: color, thickness: 0.22 },
+          bgcolor: "#1A2535",
+          borderwidth: 0,
+          steps: [
+            { range: [0, 40], color: "rgba(34,197,94,0.07)" },
+            { range: [40, 70], color: "rgba(245,158,11,0.07)" },
+            { range: [70, 100], color: "rgba(239,68,68,0.07)" }
+          ],
+          threshold: {
+            line: { color: color, width: 2 },
+            thickness: 0.7,
+            value: score
+          }
+        }
+      };
+      const layout = {
+        height: 130,
+        margin: { l: 10, r: 10, t: 10, b: 0 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        font: { family: "Inter", color: "#F8FAFC" }
+      };
+      Plotly.newPlot(divId, [trace], layout, { displayModeBar: false, responsive: true });
+    }
+
+    function generateCopilotContent(containerId, data) {
+      const recs = data.recommendations || [];
+      const excess = data.excess_inventory ?? 0;
+      const spike = Boolean(data.spike_detected);
+      const spikeRatio = Number(data.spike_ratio ?? 1.0);
+      const profit = data.profit ?? 0;
+      const margin = data.margin ?? 0.25;
+      const marginPct = Math.round(margin * 100);
+
+      const recMap = {
+        "No reorder required": { icon: "✓", style: "success", detail: "Current inventory exceeds required stock level. Supply chain is stable." },
+        "Reorder inventory immediately": { icon: "⚡", style: "critical", detail: "Stockout risk is HIGH. Place a reorder immediately to avoid disruption." },
+        "Reduce excess inventory": { icon: "↓", style: "warning", detail: "Excess units above recommended level. Reduce stock to optimise holding costs." },
+        "Monitor demand spike closely": { icon: "⚠", style: "warning", detail: `Demand spike ratio: <strong>${spikeRatio.toFixed(2)}×</strong> above baseline. Ensure safety stock is adequate.` },
+        "High risk product detected": { icon: "⚠", style: "critical", detail: "Product classified as HIGH risk. Review demand patterns and supply reliability." },
+        "Business remains profitable": { icon: "✓", style: "success", detail: `Expected profit: <strong>₹${profit.toLocaleString()}</strong> at ${marginPct}% margin.` }
+      };
+
+      let insightCardsHTML = '';
+      recs.forEach(rec => {
+        const item = recMap[rec] || { icon: "●", style: "info", detail: rec };
+        insightCardsHTML += `
+          <div class="insight-card ${item.style}">
+            <div class="insight-title">${item.icon}&nbsp; ${rec}</div>
+            <div class="insight-body">${item.detail}</div>
+          </div>
+        `;
+      });
+
+      if (profit > 0 && !recs.includes("Business remains profitable")) {
+        insightCardsHTML += `
+          <div class="insight-card success">
+            <div class="insight-title">✓&nbsp; Business remains profitable</div>
+            <div class="insight-body">Expected profit: <strong>₹${profit.toLocaleString()}</strong> at ${marginPct}% margin.</div>
+          </div>
+        `;
+      }
+
+      let actionText = '';
+      if (excess > 0 && spike) {
+        actionText = `Reduce excess inventory (${excess} units above recommended) while monitoring the detected demand spike (ratio: ${spikeRatio.toFixed(2)}×). Maintain safety stock to guard against stockout.`;
+      } else if (excess > 0) {
+        actionText = `Reduce excess inventory of ${excess} units to optimise holding costs. Current stock significantly exceeds forecasted demand.`;
+      } else if (spike) {
+        actionText = `Monitor demand spike closely. Spike ratio: ${spikeRatio.toFixed(2)}×. Ensure adequate safety stock is maintained to prevent stockout.`;
+      } else {
+        actionText = `Business is operating within normal parameters. Continue monitoring forecast accuracy, inventory levels, and supply chain health.`;
+      }
+
+      const html = `
+        <div class="dash-card-header" style="margin-bottom:0.85rem">
+          <span class="dash-card-icon">🤖</span>
+          <span class="dash-card-title">AI BUSINESS COPILOT</span>
+          <span style="margin-left:auto"><span class="badge badge-ai">● ACTIVE</span></span>
+        </div>
+        ${insightCardsHTML}
+        <div style="margin-top:0.85rem">
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem">
+            ✦ RECOMMENDED ACTION
+          </div>
+          <div class="outcome-card">
+            <div style="font-size:0.82rem;color:var(--text-primary);line-height:1.6">
+              ${actionText}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const target = document.getElementById(containerId);
+      if (target) target.innerHTML = html;
+    }
+
+    function renderForecastPlotlyChart(divId, series, forecastVal) {
+      if (!series || Object.keys(series).length === 0) return;
+      const dates = Object.keys(series);
+      const values = Object.values(series);
+
+      // Area fill
+      const traceArea = {
+        x: dates,
+        y: values,
+        mode: "none",
+        fill: "tozeroy",
+        fillcolor: "rgba(59,130,246,0.06)",
+        showlegend: false,
+        hoverinfo: "skip"
+      };
+
+      // Spline line
+      const traceLine = {
+        x: dates,
+        y: values,
+        mode: "lines+markers",
+        name: "ARIMA Forecast",
+        line: { color: "#3B82F6", width: 2.5, shape: "spline", smoothing: 1.3 },
+        marker: { size: 7, color: "#3B82F6", line: { color: "#080D17", width: 1.5 } },
+        hovertemplate: "<b>%{x}</b><br>Forecast: <b>%{y:.1f} units</b><extra></extra>"
+      };
+
+      // Highlight marker on first point
+      const traceFirst = {
+        x: [dates[0]],
+        y: [values[0]],
+        mode: "markers+text",
+        name: "Next Period",
+        marker: { size: 12, color: "#06B6D4", line: { color: "#080D17", width: 2 } },
+        text: [`  ${values[0].toFixed(0)}u`],
+        textposition: "middle right",
+        textfont: { color: "#06B6D4", size: 11, family: "Inter" },
+        hovertemplate: "<b>Next Period</b><br>%{y:.1f} units<extra></extra>"
+      };
+
+      const layout = {
+        height: divId.includes('big') ? 340 : 280,
+        margin: { l: 20, r: 20, t: 25, b: 25 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "#111B2A",
+        font: { family: "Inter, sans-serif", color: "#94A3B8", size: 11 },
+        legend: { orientation: "h", y: 1.08, x: 0, font: { size: 10, color: "#94A3B8" } },
+        xaxis: {
+          showgrid: true,
+          gridcolor: "#1E2A3A",
+          tickfont: { size: 10, color: "#475569" },
+          zeroline: false
+        },
+        yaxis: {
+          showgrid: true,
+          gridcolor: "#1E2A3A",
+          tickfont: { size: 10, color: "#475569" },
+          title: { text: "Units", font: { size: 10, color: "#475569" } },
+          zeroline: false,
+          rangemode: "tozero"
+        },
+        hovermode: "x unified",
+        hoverlabel: { bgcolor: "#0D1421", bordercolor: "#1E2A3A", font: { size: 11, family: "Inter" } }
+      };
+
+      Plotly.newPlot(divId, [traceArea, traceLine, traceFirst], layout, { displayModeBar: false, responsive: true });
+    }
+
+    function renderMLOpsCharts(mlops) {
+      const mae = mlops.mae ?? 4.2;
+      const driftScore = mlops.drift_score ?? 42.8;
+
+      // MAE Gauge
+      const maeColor = mae <= 5 ? "#22C55E" : (mae <= 10 ? "#F59E0B" : "#EF4444");
+      const maeTrace = {
+        type: "indicator",
+        mode: "gauge+number",
+        value: mae,
+        number: { font: { size: 20, color: "#F8FAFC", family: "Inter" } },
+        gauge: {
+          axis: { range: [0, 20], visible: false },
+          bar: { color: maeColor, thickness: 0.28 },
+          bgcolor: "#1A2535",
+          borderwidth: 0,
+          steps: [
+            { range: [0, 5], color: "rgba(34,197,94,0.07)" },
+            { range: [5, 10], color: "rgba(245,158,11,0.07)" },
+            { range: [10, 20], color: "rgba(239,68,68,0.07)" }
+          ]
+        }
+      };
+      Plotly.newPlot("mae-gauge-chart", [maeTrace], {
+        height: 115,
+        margin: { l: 10, r: 10, t: 5, b: 0 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        font: { family: "Inter", color: "#F8FAFC" }
+      }, { displayModeBar: false, responsive: true });
+
+      // Drift Bar
+      const driftColor = driftScore > 20 ? "#F59E0B" : "#22C55E";
+      const driftTrace = {
+        type: "bar",
+        x: [driftScore],
+        y: ["Drift"],
+        orientation: "h",
+        marker: { color: driftColor },
+        width: 0.45,
+        hovertemplate: `Drift Score: ${driftScore.toFixed(1)}<extra></extra>`
+      };
+      const driftLayout = {
+        height: 75,
+        margin: { l: 4, r: 4, t: 5, b: 5 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "#111B2A",
+        xaxis: { range: [0, Math.max(driftScore * 1.25, 50)], showgrid: false, zeroline: false, showticklabels: false },
+        yaxis: { showticklabels: false, showgrid: false },
+        shapes: [{
+          type: 'line',
+          x0: 20, x1: 20, y0: -0.5, y1: 0.5,
+          line: { color: 'rgba(148,163,184,0.5)', width: 1.5, dash: 'dash' }
+        }]
+      };
+      Plotly.newPlot("drift-bar-chart", [driftTrace], driftLayout, { displayModeBar: false, responsive: true });
+    }
+
+    // Render Everything from Data
+    function renderAllComponents(data) {
+      const forecast = data.forecast ?? 0;
+      const revenue = data.revenue ?? 0;
+      const profit = data.profit ?? 0;
+      const margin = data.margin ?? 0.25;
+      const marginPct = Math.round(margin * 100);
+      const inventory = data.inventory ?? 0;
+      const excess = data.excess_inventory ?? 0;
+      const riskCat = (data.risk_category || 'LOW').toUpperCase();
+      const riskScore = data.risk_score ?? 0;
+      const status = (data.status || 'HEALTHY').toUpperCase();
+      const recs = data.recommendations || [];
+      const spike = Boolean(data.spike_detected);
+      const fs = data.forecast_series || {};
+
+      // 1. Executive KPIs
+      document.getElementById('kpi-forecast').innerText = forecast.toLocaleString();
+      document.getElementById('kpi-revenue').innerText = '₹' + revenue.toLocaleString();
+      document.getElementById('kpi-profit').innerText = '₹' + profit.toLocaleString();
+      document.getElementById('kpi-margin-sub').innerText = marginPct + '% gross margin';
+      document.getElementById('kpi-margin-badge').innerText = marginPct + '% MARGIN';
+      document.getElementById('kpi-inventory').innerText = inventory.toLocaleString();
+
+      const invBadge = document.getElementById('kpi-inv-badge');
+      const invCard = document.getElementById('kpi-inv-card');
+      if (excess > 0) {
+        invBadge.className = 'badge badge-warning';
+        invBadge.innerText = excess + ' excess';
+        invCard.className = 'kpi-card warning';
+      } else {
+        invBadge.className = 'badge badge-success';
+        invBadge.innerText = 'Optimal level';
+        invCard.className = 'kpi-card success';
+      }
+
+      const riskBadge = document.getElementById('kpi-risk-badge');
+      const riskCard = document.getElementById('kpi-risk-card');
+      const riskVal = document.getElementById('kpi-risk-val');
+      const riskSub = document.getElementById('kpi-risk-sub');
+      riskVal.innerText = riskCat;
+      riskSub.innerText = `Score: ${riskScore} / 100`;
+      riskBadge.innerText = `SCORE ${riskScore}`;
+      const riskStyle = riskCat === 'HIGH' ? 'critical' : (riskCat === 'MEDIUM' ? 'warning' : 'success');
+      riskBadge.className = `badge badge-${riskStyle}`;
+      riskCard.className = `kpi-card ${riskStyle}`;
+
+      // 2. Business Health
+      const bhBadge = document.getElementById('bh-badge-container');
+      const bhSummary = document.getElementById('bh-summary');
+      const bhDetail = document.getElementById('bh-detail');
+      const isHealthy = status === 'HEALTHY' && (riskCat === 'LOW' || riskCat === 'MEDIUM') && !spike;
+      bhBadge.innerHTML = `<span class="badge badge-${isHealthy ? 'success' : 'warning'}">${isHealthy ? '✓' : '⚠'} ${status}</span>`;
+      bhSummary.innerText = recs.length > 0 ? recs[0] : (isHealthy ? 'No immediate business-critical issues detected.' : 'Attention required — review risk and inventory.');
+
+      const detailParts = [];
+      if (spike) detailParts.push("Demand spike active");
+      if (excess > 0) detailParts.push(`${excess} units excess inventory`);
+      if (riskCat === 'HIGH') detailParts.push("High risk classification");
+      bhDetail.innerText = detailParts.length > 0 ? detailParts.join(' · ') : 'All systems nominal';
+
+      // 3. Demand Intelligence Cards
+      const dIntelHTML = generateDemandIntelCardHTML(data);
+      const di1 = document.getElementById('demand-intel-card-overview');
+      if (di1) di1.innerHTML = dIntelHTML;
+      const di2 = document.getElementById('demand-intel-card-page');
+      if (di2) di2.innerHTML = dIntelHTML;
+      const di3 = document.getElementById('demand-intel-card-page2');
+      if (di3) di3.innerHTML = dIntelHTML;
+
+      // 4. Forecast Charts & Metrics
+      const vals = Object.values(fs);
+      const fMin = vals.length ? Math.min(...vals) : forecast;
+      const fMax = vals.length ? Math.max(...vals) : forecast;
+      const fTrend = vals.length > 1 ? (vals[vals.length - 1] > vals[0] ? '↑ Rising' : (vals[vals.length - 1] < vals[0] ? '↓ Falling' : '→ Stable')) : '—';
+      const mlops = data.mlops || {};
+
+      document.getElementById('fc-metric-val').innerText = forecast;
+      document.getElementById('fc-metric-conf').innerText = (data.replenishment?.confidence ?? 99) + '%';
+      document.getElementById('fc-metric-trend').innerText = fTrend;
+      document.getElementById('fc-metric-range').innerText = `${Math.round(fMin)}–${Math.round(fMax)}u`;
+      document.getElementById('fc-metric-mae').innerText = mlops.mae ?? 4.2;
+
+      renderForecastPlotlyChart('forecast-chart-container', fs, forecast);
+      renderForecastPlotlyChart('forecast-chart-big', fs, forecast);
+
+      // Forecast Series Table
+      const tbody = document.querySelector('#forecast-series-table tbody');
+      if (tbody && vals.length) {
+        tbody.innerHTML = Object.entries(fs).map(([d, val]) => {
+          const num = Number(val);
+          const lower = Math.max(0, num * 0.88).toFixed(1);
+          const upper = (num * 1.12).toFixed(1);
+          return `<tr>
+            <td><strong>${d}</strong></td>
+            <td style="color:var(--color-primary);font-weight:700">${num.toFixed(2)}</td>
+            <td>${lower}</td>
+            <td>${upper}</td>
+            <td><span class="badge badge-success">99%</span></td>
+          </tr>`;
+        }).join('');
+      }
+
+      // 5. Inventory Health Cards
+      const invHTML = generateInventoryCardHTML(data);
+      const inv1 = document.getElementById('inv-card-overview');
+      if (inv1) inv1.innerHTML = invHTML;
+      const inv2 = document.getElementById('inv-card-page');
+      if (inv2) inv2.innerHTML = invHTML;
+      const inv3 = document.getElementById('inv-card-page2');
+      if (inv3) inv3.innerHTML = invHTML;
+
+      // 6. Risk Intelligence Cards
+      generateRiskCardContent('risk-card-overview', data);
+      generateRiskCardContent('risk-card-page', data);
+
+      // 7. Replenishment Cards
+      const repHTML = generateReplenishmentCardHTML(data);
+      ['rep-card-overview', 'rep-card-page', 'rep-card-page2', 'rep-card-standalone'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = repHTML;
+      });
+
+      // 8. Copilot Panels
+      generateCopilotContent('copilot-panel-overview', data);
+      generateCopilotContent('copilot-panel-page', data);
+
+      // Vertical KPI list for Copilot page
+      const vKpiEl = document.getElementById('vertical-kpi-panel');
+      if (vKpiEl) {
+        vKpiEl.innerHTML = `
+          <div class="dash-card-header"><span class="dash-card-title">EXECUTIVE VITALS</span></div>
+          <div class="metric-row"><span class="metric-row-label">FORECAST</span><span class="metric-row-value" style="color:var(--color-primary)">${forecast} units</span></div>
+          <div class="metric-row"><span class="metric-row-label">REVENUE</span><span class="metric-row-value" style="color:var(--color-ai)">₹${revenue.toLocaleString()}</span></div>
+          <div class="metric-row"><span class="metric-row-label">PROFIT</span><span class="metric-row-value" style="color:var(--color-success)">₹${profit.toLocaleString()}</span></div>
+          <div class="metric-row"><span class="metric-row-label">INVENTORY</span><span class="metric-row-value">${inventory} units</span></div>
+          <div class="metric-row" style="border-bottom:none"><span class="metric-row-label">RISK</span><span class="metric-row-value" style="color:var(--color-${riskStyle})">${riskCat}</span></div>
+        `;
+      }
+      const bhCopy = document.getElementById('bh-card-page');
+      if (bhCopy) {
+        bhCopy.innerHTML = `
+          <div class="dash-card-header"><span class="dash-card-icon">🏢</span><span class="dash-card-title">BUSINESS HEALTH</span></div>
+          <div style="margin-bottom:0.4rem"><span class="badge badge-${isHealthy ? 'success' : 'warning'}">${isHealthy ? '✓' : '⚠'} ${status}</span></div>
+          <div style="font-size:0.75rem;color:var(--text-primary);margin-bottom:0.2rem">${recs[0] || 'Nominal'}</div>
+          <div style="font-size:0.68rem;color:var(--text-muted)">${detailParts.join(' · ') || 'All systems nominal'}</div>
+        `;
+      }
+
+      // 9. Supply Chain Cards
+      const scHTML = generateSupplyChainCardHTML(data);
+      ['sc-card-overview', 'sc-card-page', 'sc-card-page2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = scHTML;
+      });
+
+      // 10. Digital Twin baseline
+      updateDigitalTwinLive(document.getElementById('dt-slider')?.value || 20);
+
+      // 11. MLOps Monitoring
+      document.getElementById('ml-status-badge').className = `badge badge-${mlops.model_status === 'GOOD' ? 'success' : 'warning'}`;
+      document.getElementById('ml-status-badge').innerText = `● ${mlops.model_status || 'GOOD'}`;
+      document.getElementById('ml-mae-val').innerText = mlops.mae ?? 4.2;
+      document.getElementById('ml-rmse-val').innerText = mlops.rmse ?? 5.8;
+
+      const driftDet = Boolean(mlops.drift_detected);
+      const driftScore = mlops.drift_score ?? 42.8;
+      document.getElementById('ml-drift-badge').className = `badge badge-${driftDet ? 'warning' : 'success'}`;
+      document.getElementById('ml-drift-badge').innerText = driftDet ? '⚠ DETECTED' : '✓ NONE';
+      document.getElementById('ml-drift-score').innerText = driftScore;
+      document.getElementById('ml-drift-status').innerText = driftDet ? 'Above threshold' : 'Within range';
+
+      const retrainAct = mlops.retrain_action || 'RETRAIN_MODEL';
+      const isRetrain = retrainAct === 'RETRAIN_MODEL';
+      document.getElementById('ml-action-badge').className = `badge badge-${isRetrain ? 'critical' : 'success'}`;
+      document.getElementById('ml-action-badge').innerText = isRetrain ? '↻ RETRAIN' : '✓ MODEL OK';
+      document.getElementById('ml-action-val').innerText = retrainAct;
+
+      renderMLOpsCharts(mlops);
+    }
+
+    // Digital Twin Realtime Logic
+    function updateDigitalTwinLive(incPercent) {
+      document.getElementById('dt-slider-val').innerText = '+' + incPercent + '%';
+      const curInv = globalData?.inventory ?? 100;
+      const forecastVal = globalData?.forecast ?? 32;
+
+      const simInv = Math.round(curInv * (1 + incPercent / 100));
+      const costBefore = curInv * 10;
+      const costAfter = simInv * 10;
+      const stockoutBefore = forecastVal > curInv;
+      const stockoutAfter = forecastVal > simInv;
+
+      document.getElementById('dt-cur-inv').innerText = curInv;
+      document.getElementById('dt-cur-cost').innerText = '₹' + costBefore.toLocaleString();
+      document.getElementById('dt-cur-status').innerHTML = stockoutBefore 
+        ? '<span class="badge badge-critical">⚡ STOCKOUT</span>' 
+        : '<span class="badge badge-success">✓ SAFE</span>';
+
+      const deltaInv = simInv - curInv;
+      const deltaCost = costAfter - costBefore;
+      document.getElementById('dt-sim-inv').innerText = simInv;
+      document.getElementById('dt-sim-inv-delta').innerText = `units (+${deltaInv})`;
+      document.getElementById('dt-sim-cost').innerText = '₹' + costAfter.toLocaleString();
+      document.getElementById('dt-sim-cost-delta').innerText = `holding cost (+₹${deltaCost.toLocaleString()})`;
+      document.getElementById('dt-sim-status').innerHTML = stockoutAfter 
+        ? '<span class="badge badge-critical">⚡ STOCKOUT</span>' 
+        : '<span class="badge badge-success">✓ SAFE</span>';
+
+      const interp = document.getElementById('dt-interpretation');
+      if (!stockoutBefore && !stockoutAfter) {
+        interp.className = 'alert-banner info';
+        interp.innerHTML = `◇ Both states are safe. Increasing inventory adds ₹${deltaCost.toLocaleString()} holding cost with no stockout benefit.`;
+      } else if (stockoutBefore && !stockoutAfter) {
+        interp.className = 'alert-banner success';
+        interp.innerHTML = `✓ Simulation resolves stockout risk. Recommend increasing inventory by ${incPercent}%.`;
+      } else if (!stockoutBefore && stockoutAfter) {
+        interp.className = 'alert-banner warning';
+        interp.innerHTML = `⚠ Warning: simulated scenario introduces stockout risk despite higher inventory.`;
+      } else {
+        interp.className = 'alert-banner critical';
+        interp.innerHTML = `⚡ Both states carry stockout risk. Consider demand reduction or further inventory increase.`;
+      }
+    }
+
+    // What-If Simulation API Call
+    async function executeSimulation() {
+      const btn = document.getElementById('sim-run-btn');
+      const container = document.getElementById('simulation-results-container');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⚡ Running AI Simulation...</span>';
+
+      const discount = parseFloat(document.getElementById('sim-disc-slider').value);
+      const delay = parseInt(document.getElementById('sim-delay-slider').value);
+      const invIncrease = parseFloat(document.getElementById('sim-inv-slider').value);
+
+      try {
+        let res;
+        const payload = {
+          discount_percent: discount,
+          supplier_delay_days: delay,
+          inventory_increase_percent: invIncrease
+        };
+
+        try {
+          res = await fetch('/simulate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch(e) {
+          res = await fetch('https://ai-retail-decision-intelligence-pla.vercel.app/simulate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
+
+        if (!res.ok) throw new Error('Simulation failed with status ' + res.status);
+        const result = await res.json();
+        renderSimulationResults(result, delay);
+      } catch (err) {
+        container.innerHTML = `
+          <div class="dash-card">
+            <div class="alert-banner critical">
+              ⚡ <strong>Simulation Request Failed</strong><br>
+              <span style="font-size:0.72rem">${err.message}</span>
+            </div>
+          </div>
+        `;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>▶ Run Simulation</span>';
+      }
+    }
+
+    function renderSimulationResults(res, selectedDelay) {
+      const projDemand = res.projected_demand ?? 0;
+      const discPrice = res.discounted_price ?? 0;
+      const expRevenue = res.expected_revenue ?? 0;
+      const expProfit = res.expected_profit ?? 0;
+      const stockoutRisk = (res.stockout_risk || 'LOW').toUpperCase();
+      const twin = res.digital_twin || {};
+      const sc = res.supply_chain || {};
+      const scRisk = (sc.risk || 'LOW').toUpperCase();
+
+      const soStyle = stockoutRisk === 'HIGH' ? 'critical' : (stockoutRisk === 'MEDIUM' ? 'warning' : 'success');
+      const scStyle = scRisk === 'HIGH' ? 'critical' : (scRisk === 'MEDIUM' ? 'warning' : 'success');
+
+      const html = `
+        <!-- Main Simulation Result -->
+        <div class="outcome-card" style="margin-bottom:0.75rem">
+          <div class="outcome-card-title">◇ SIMULATION RESULT</div>
+          <div class="metric-row">
+            <span class="metric-row-label">Projected Demand</span>
+            <span class="metric-row-value" style="color:var(--color-primary)">${projDemand} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Discounted Price</span>
+            <span class="metric-row-value">₹${discPrice.toFixed(2)}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Expected Revenue</span>
+            <span class="metric-row-value">₹${Math.round(expRevenue).toLocaleString()}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Expected Profit</span>
+            <span class="metric-row-value" style="color:var(--color-success)">₹${Math.round(expProfit).toLocaleString()}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Stockout Risk</span>
+            <span class="metric-row-value"><span class="badge badge-${soStyle}">${stockoutRisk}</span></span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Supply Chain Risk</span>
+            <span class="metric-row-value"><span class="badge badge-${scStyle}">${scRisk}</span></span>
+          </div>
+        </div>
+
+        <!-- Digital Twin Simulated State -->
+        <div class="outcome-card" style="margin-bottom:0.75rem">
+          <div class="outcome-card-title">◇ DIGITAL TWIN</div>
+          <div class="metric-row">
+            <span class="metric-row-label">Inventory Before</span>
+            <span class="metric-row-value">${twin.inventory_before ?? 100} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Inventory After</span>
+            <span class="metric-row-value" style="color:var(--color-primary)">${twin.inventory_after ?? 120} units</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Stockout Before</span>
+            <span class="metric-row-value">${twin.stockout_before ? 'YES' : 'NO'}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Stockout After</span>
+            <span class="metric-row-value">${twin.stockout_after ? 'YES' : 'NO'}</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Inventory Cost Before</span>
+            <span class="metric-row-value">₹${Number(twin.inventory_cost_before ?? 1000).toLocaleString()}</span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Inventory Cost After</span>
+            <span class="metric-row-value">₹${Number(twin.inventory_cost_after ?? 1200).toLocaleString()}</span>
+          </div>
+        </div>
+
+        <!-- Supply Chain Impact -->
+        <div class="outcome-card">
+          <div class="outcome-card-title">◇ SUPPLY CHAIN IMPACT</div>
+          <div class="metric-row">
+            <span class="metric-row-label">Supplier Delay</span>
+            <span class="metric-row-value">${sc.supplier_delay ?? selectedDelay} days</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-row-label">Supply Risk</span>
+            <span class="metric-row-value"><span class="badge badge-${scStyle}">${scRisk}</span></span>
+          </div>
+          <div class="metric-row" style="border-bottom:none">
+            <span class="metric-row-label">Recommended Safety Stock</span>
+            <span class="metric-row-value" style="color:var(--color-warning)">${sc.recommended_safety_stock ?? 16} units</span>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('simulation-results-container').innerHTML = html;
+    }
+
+    // Initial boot
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchData();
+    });
+  </script>
+</body>
+</html>

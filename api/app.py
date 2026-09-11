@@ -11,9 +11,12 @@ if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
     
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
+
+from api.dashboard_ui import get_dashboard_html
 
 
 # ---------------------------------------------------------------------------
@@ -170,15 +173,38 @@ SUPPLIER_DELAY_DAYS = 10
 
 
 # ---------------------------------------------------------------------------
-# Health / Home endpoint
+# Dashboard UI / Health endpoints
 # ---------------------------------------------------------------------------
 
 @app.get("/")
-def home():
+def home(request: Request):
+    """
+    Serves the AI Retail Decision Intelligence interactive dashboard UI.
+    If explicitly requested with Accept: application/json, returns API health JSON.
+    """
+    accept = request.headers.get("accept", "")
+    if "application/json" in accept and "text/html" not in accept:
+        return JSONResponse(
+            content={
+                "message": (
+                    "AI Retail Decision Intelligence "
+                    "Platform API Running"
+                ),
+                "version": "1.0.0"
+            }
+        )
+
+    return HTMLResponse(
+        content=get_dashboard_html(),
+        status_code=200
+    )
+
+
+@app.get("/health")
+def health():
     """
     Basic API health endpoint.
     """
-
     return {
         "message": (
             "AI Retail Decision Intelligence "

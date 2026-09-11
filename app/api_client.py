@@ -13,14 +13,21 @@ API_BASE_URL = "https://ai-retail-decision-intelligence-pla.vercel.app"
 # ─────────────────────────────────────────────────────────────────────────────
 
 def get_health():
-    response = requests.get(
-        f"{API_BASE_URL}/",
-        timeout=30,
-    )
-
-    response.raise_for_status()
-
-    return response.json()
+    try:
+        response = requests.get(
+            f"{API_BASE_URL}/health",
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.json()
+    except Exception:
+        response = requests.get(
+            f"{API_BASE_URL}/",
+            headers={"Accept": "application/json"},
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.json()
 
 
 # ─────────────────────────────────────────────────────────────────────────────
